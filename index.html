@@ -1,42 +1,71 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
   <meta charset="UTF-8">
   <title>حاسبة التضخم</title>
-<link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <h2>حاسبة تغير قيمة النقود بسبب التضخم</h2>
-  <label>المبلغ المخزن:</label>
-  <input type="number" id="amount" placeholder="أدخل المبلغ"><br><br>
-  
-  <label>تاريخ التخزين (سنة):</label>
-  <input type="number" id="year" placeholder="أدخل سنة التخزين"><br><br>
-  
-  <button onclick="calculateInflation()">احسب</button>
-  <p id="result"></p>
-  
+
+  <div class="container">
+
+    <p class="">حاسبة تغير قيمة النقود بسبب التضخم</p>
+
+    <div class="form-control">
+      <div class="" id="">
+        <input class="input" id="amount" name="amount" placeholder="أدخل المبلغ">
+      </div>
+    </div>
+
+      <select class="select" id="year" name="year">
+        <option value="2015">2015</option>
+        <option value="2016">2016</option>
+        <option value="2017">2017</option>
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+        <option value="2020">2020</option>
+        <option value="2021">2021</option>
+        <option value="2022">2022</option>
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+      </select>
+      <p id="result"></p>
+      <button class="btn" onclick="calculateInflation()">النتيجة</button>
+    </div>
+  </div>
+
   <script>
     const inflationRates = {
-      2020: 0.02,
-      2021: 0.018,
-      2022: 0.03,
+      2015: 0.016,
+      2016: 0.016,
+      2017: 0.002,
+      2018: 0.019,
+      2019: 0.002,
+      2020: 0.002,
+      2021: 0.014,
+      2022: 0.066,
+      2023: 0.101,
+      2024: 0.028 // Example for 2024, adjust as needed
     };
 
     function calculateInflation() {
       const amount = parseFloat(document.getElementById('amount').value);
       const startYear = parseInt(document.getElementById('year').value);
       const currentYear = new Date().getFullYear();
-      
+
       let adjustedAmount = amount;
-      
+
       for (let year = startYear; year <= currentYear; year++) {
         const inflation = inflationRates[year] || 0;
         adjustedAmount *= (1 - inflation);
       }
-      
+
       document.getElementById('result').innerText = `القيمة المتبقية: ${adjustedAmount.toFixed(2)} درهم`;
     }
+
   </script>
 </body>
+
 </html>
