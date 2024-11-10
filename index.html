@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>حاسبة التضخم</title>
+</head>
+<body>
+  <h2>حاسبة تغير قيمة النقود بسبب التضخم</h2>
+  <label>المبلغ المخزن:</label>
+  <input type="number" id="amount" placeholder="أدخل المبلغ"><br><br>
+  
+  <label>تاريخ التخزين (سنة):</label>
+  <input type="number" id="year" placeholder="أدخل سنة التخزين"><br><br>
+  
+  <button onclick="calculateInflation()">احسب</button>
+  <p id="result"></p>
+  
+  <script>
+    const inflationRates = {
+      2020: 0.02,
+      2021: 0.018,
+      2022: 0.03,
+    };
+
+    function calculateInflation() {
+      const amount = parseFloat(document.getElementById('amount').value);
+      const startYear = parseInt(document.getElementById('year').value);
+      const currentYear = new Date().getFullYear();
+      
+      let adjustedAmount = amount;
+      
+      for (let year = startYear; year <= currentYear; year++) {
+        const inflation = inflationRates[year] || 0;
+        adjustedAmount *= (1 - inflation);
+      }
+      
+      document.getElementById('result').innerText = `القيمة المتبقية: ${adjustedAmount.toFixed(2)} درهم`;
+    }
+  </script>
+</body>
+</html>
